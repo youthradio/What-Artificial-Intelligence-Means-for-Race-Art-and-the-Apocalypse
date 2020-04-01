@@ -1,6 +1,11 @@
 <template>
   <div class="container">
-    <HeaderContainer />
+    <FeatureHeaderText
+      :header-data="headerData"
+      @onHeaderImgHeight="headerImageHeight = $event"
+    />
+    <MenuHeader :offset="headerImageHeight" />
+
     <article>
       <h4>
         {{ articleData.introduction.title }}
@@ -26,13 +31,16 @@
 
 import CommonUtils from '../mixins/CommonUtils'
 import ArticleData from '../data/data.json'
-import HeaderContainer from '~/components/Header/HeaderContainer'
+import POSTCONFIG from '~/post.config'
+import FeatureHeaderText from '~/components/Header/FeatureHeaderText'
+import MenuHeader from '~/components/Header/MenuHeader'
 import ShareContainer from '~/components/custom/ShareContainer'
 import FooterContainer from '~/components/Footer/FooterContainer'
 
 export default {
   components: {
-    HeaderContainer,
+    MenuHeader,
+    FeatureHeaderText,
     ShareContainer,
     FooterContainer
   },
@@ -46,9 +54,23 @@ export default {
   },
   data () {
     return {
+      headerImageHeight: 0
     }
   },
-  computed: {},
+  computed: {
+    headerData () {
+      return {
+        featureImage: POSTCONFIG.featureImagePath,
+        title: this.articleData.title,
+        subtitle: this.articleData.subtitle,
+        suptitle: this.articleData.suptitle,
+        author: POSTCONFIG.author,
+        imageCaption: POSTCONFIG.featureImageCaption,
+        publishDate: POSTCONFIG.publishDate,
+        location: POSTCONFIG.location
+      }
+    }
+  },
   watch: {
 
   },

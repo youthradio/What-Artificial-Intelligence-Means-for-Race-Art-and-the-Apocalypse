@@ -77,15 +77,20 @@ function markdown2html (data) {
         }
         if (key === 'text') {
           configDom = {
-            ALLOWED_TAGS: ['a', 'p', 'img', 'div', 'iframe', 'style', 'strong', 'i'],
+            ALLOWED_TAGS: ['br', 'span', 'a', 'p', 'img', 'div', 'iframe', 'style', 'strong', 'i'],
             KEEP_CONTENT: true
           }
         }
-        obj[key] = DOMPurify.sanitize(marked(obj[key]), configDom).trim()
         // make slugs from titles
         if (key === 'title') {
           obj.slug = utils.makeSlug(obj[key])
+          configDom = {
+            ALLOWED_TAGS: ['br', 'span'],
+            KEEP_CONTENT: true
+          }
         }
+
+        obj[key] = DOMPurify.sanitize(marked(obj[key]), configDom).trim()
       }
     })
   }
