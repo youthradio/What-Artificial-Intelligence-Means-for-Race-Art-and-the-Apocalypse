@@ -1,6 +1,23 @@
-# A College Guide to ... Myself
+# The dread and play of Artificial Intelligence
 
-> My stunning Nuxt.js project
+
+
+Clone the repository
+
+
+
+```bash
+
+clone
+
+$ git@github.com:youthradio/the-dread-play-artificial-Intelligence.git
+
+then 
+
+$ cd the-dread-play-artificial-Intelligence
+$ git submodule add git@github.com:youthradio/base-components.git components
+
+```
 
 ## Build Setup
 
