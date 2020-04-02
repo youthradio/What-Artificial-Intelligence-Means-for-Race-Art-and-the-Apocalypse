@@ -4,6 +4,9 @@ dotenv.config()
 process.env.DEBUG = 'nuxt:*'
 
 export default {
+  env: {
+    baseUrl: POSTCONFIG.baseURL || 'http://localhost:3000'
+  },
   mode: 'universal',
 
   /*
