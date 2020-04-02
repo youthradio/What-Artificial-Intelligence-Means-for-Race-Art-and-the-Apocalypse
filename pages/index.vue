@@ -28,7 +28,11 @@
         class="multi-col"
         v-html="section.text"
       />
-      <VoiceDialog :audios="section.audio" />
+      <VoiceDialog
+        :audios="section.audio"
+        :dialogs="tracks.get(section.key)"
+        :guests="articleData.guests"
+      />
     </article>
     <h4>
       {{ articleData.about.title }}
@@ -51,9 +55,9 @@ import Tracks from '../data/tracks.json'
 import POSTCONFIG from '~/post.config'
 import FeatureHeaderText from '~/components/Header/FeatureHeaderText'
 import MenuHeader from '~/components/Header/MenuHeader'
-import ShareContainer from '~/components/custom/ShareContainer'
+import ShareContainer from '~/components/Custom/ShareContainer'
 import FooterContainer from '~/components/Footer/FooterContainer'
-import VoiceDialog from '~/components/custom/VoiceDialog.vue'
+import VoiceDialog from '~/components/Custom/VoiceDialog.vue'
 
 export default {
   components: {
