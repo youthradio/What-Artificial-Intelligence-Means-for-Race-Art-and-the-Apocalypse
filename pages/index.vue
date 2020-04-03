@@ -28,7 +28,7 @@
         :guests="articleData.guests"
       />
 
-      <PollComponent />
+      <PollComponent :question-set="articleData.quiz" />
     </article>
     <h4>
       {{ articleData.about.title }}
