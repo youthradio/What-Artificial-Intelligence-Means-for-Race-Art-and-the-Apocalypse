@@ -10,44 +10,36 @@
       <h4>
         {{ articleData.introduction.title }}
       </h4>
-      <div
-        class="multi-col"
-        v-html="articleData.introduction.text"
-      />
+      <div class="multi-col" v-html="articleData.introduction.text" />
     </article>
 
     <article
       v-for="(section, index) in articleData.sections"
       :key="section.title"
     >
-      <h5> Section {{ index + 1 }}</h5>
+      <h5>Section {{ index + 1 }}</h5>
       <h1>
         {{ section.title }}
       </h1>
-      <div
-        class="multi-col"
-        v-html="section.text"
-      />
+      <div class="multi-col" v-html="section.text" />
       <VoiceDialog
         :audios="section.audio"
         :dialogs="tracks.get(section.key)"
         :guests="articleData.guests"
       />
+
+      <PollComponent />
     </article>
     <h4>
       {{ articleData.about.title }}
     </h4>
-    <div
-      class="multi-col"
-      v-html="articleData.about.text"
-    />
+    <div class="multi-col" v-html="articleData.about.text" />
     <ShareContainer />
     <FooterContainer />
   </div>
 </template>
 
 <script>
-
 import CommonUtils from '../mixins/CommonUtils'
 import ArticleData from '../data/data.json'
 import Tracks from '../data/tracks.json'
@@ -57,6 +49,7 @@ import FeatureHeaderText from '~/components/Header/FeatureHeaderText'
 import MenuHeader from '~/components/Header/MenuHeader'
 import ShareContainer from '~/components/Custom/ShareContainer'
 import FooterContainer from '~/components/Footer/FooterContainer'
+import PollComponent from '~/components/Custom/PollComponent'
 import VoiceDialog from '~/components/Custom/VoiceDialog.vue'
 
 export default {
@@ -65,11 +58,10 @@ export default {
     FeatureHeaderText,
     ShareContainer,
     FooterContainer,
-    VoiceDialog
+    VoiceDialog,
+    PollComponent
   },
-  mixins: [
-    CommonUtils
-  ],
+  mixins: [CommonUtils],
   asyncData (ctx) {
     return {
       articleData: ArticleData.content,
@@ -95,14 +87,9 @@ export default {
       }
     }
   },
-  watch: {
-
-  },
-  mounted () {
-  },
-  methods: {
-
-  }
+  watch: {},
+  mounted () {},
+  methods: {}
 }
 </script>
 
