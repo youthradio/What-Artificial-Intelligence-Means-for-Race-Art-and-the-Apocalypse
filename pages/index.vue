@@ -35,7 +35,8 @@
     </h4>
     <div class="multi-col" v-html="articleData.about.text" />
     <ShareContainer />
-    <FooterContainer />
+    <FooterMenu />
+    <FooterEmailSubscribe />
   </div>
 </template>
 
@@ -43,7 +44,8 @@
 import CommonUtils from '../mixins/CommonUtils'
 import ArticleData from '../data/data.json'
 import Tracks from '../data/tracks.json'
-
+import FooterEmailSubscribe from '~/components/Footer/FooterEmailSubscribe'
+import FooterMenu from '~/components/Footer/FooterMenu'
 import POSTCONFIG from '~/post.config'
 import FeatureHeaderText from '~/components/Header/FeatureHeaderText'
 import MenuHeader from '~/components/Header/MenuHeader'
@@ -55,6 +57,8 @@ import VoiceDialog from '~/components/Custom/VoiceDialog.vue'
 export default {
   components: {
     MenuHeader,
+    FooterEmailSubscribe,
+    FooterMenu,
     FeatureHeaderText,
     ShareContainer,
     FooterContainer,

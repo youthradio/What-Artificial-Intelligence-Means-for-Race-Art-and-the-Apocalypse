@@ -18,11 +18,6 @@
             "text": "<p>Twee everyday carry four dollar toast, selvage fanny pack echo park leggings lumbersexual cardigan scenester artisan stumptown. Gochujang DIY lumbersexual adaptogen fashion axe humblebrag. Deep v kogi humblebrag, kickstarter etsy single-origin coffee subway tile iPhone tofu 8-bit mustache cornhole readymade. Pork belly vinyl skateboard cred edison bulb coloring book. Readymade lumbersexual cardigan, gentrify tousled poutine retro paleo blue bottle chartreuse vape tumeric mlkshk affogato heirloom. Cronut raclette lumbersexual williamsburg, farm-to-table umami succulents craft beer. Forage live-edge irony four loko chicharrones you probably haven't heard of them.</p>\n<p>Blue bottle salvia selvage pabst la croix post-ironic waistcoat hexagon yr mixtape vape blog church-key freegan. Viral drinking vinegar 3 wolf moon tilde mumblecore heirloom, food truck celiac trust fund salvia venmo. Stumptown tote bag butcher, aesthetic kitsch pour-over man bun raclette messenger bag before they sold out banjo. Pok pok asymmetrical yr post-ironic, tattooed wolf adaptogen forage photo booth synth palo santo celiac chambray yuccie. Raw denim franzen skateboard, tofu poutine wayfarers fanny pack banjo schlitz cardigan 3 wolf moon yr trust fund VHS. Messenger bag vegan leggings meh pitchfork poutine. Echo park bespoke prism sustainable roof party.</p>",
             "slug": "related-posts-and-projects"
         },
-        "quiz": {
-            "question": "What would happen if Blah Blah Blah Blah?",
-            "A": "Not sure what would happen...",
-            "B": "I dont care what would happen!"
-        },
         "sections": [
             {
                 "title": "Apocalypse",
@@ -38,6 +33,19 @@
                     }
                 ],
                 "text": "<p>Twee everyday carry four dollar toast, selvage fanny pack echo park leggings lumbersexual cardigan scenester artisan stumptown. Gochujang DIY lumbersexual adaptogen fashion axe humblebrag. Deep v kogi humblebrag, kickstarter etsy single-origin coffee subway tile iPhone tofu 8-bit mustache cornhole readymade. Pork belly vinyl skateboard cred edison bulb coloring book. </p>\n<p>Blue bottle salvia selvage pabst la croix post-ironic waistcoat hexagon yr mixtape vape blog church-key freegan. Viral drinking vinegar 3 wolf moon tilde mumblecore heirloom, food truck celiac trust fund salvia venmo. Stumptown tote bag butcher, aesthetic kitsch pour-over man bun raclette messenger bag before they sold out banjo.</p>",
+                "quiz": {
+                    "question": "Apocalypse What would happen if Blah Blah Blah Blah",
+                    "options": [
+                        {
+                            "title": "Not sure what would happen…",
+                            "slug": "not-sure-what-would-happen"
+                        },
+                        {
+                            "title": "I dont care what would happen!",
+                            "slug": "i-dont-care-what-would-happen"
+                        }
+                    ]
+                },
                 "slug": "apocalypse"
             },
             {
@@ -54,6 +62,19 @@
                     }
                 ],
                 "text": "<p>Twee everyday carry four dollar toast, selvage fanny pack echo park leggings lumbersexual cardigan scenester artisan stumptown. Gochujang DIY lumbersexual adaptogen fashion axe humblebrag. Deep v kogi humblebrag, kickstarter etsy single-origin coffee subway tile iPhone tofu 8-bit mustache cornhole readymade. Pork belly vinyl skateboard cred edison bulb coloring book. </p>\n<p>Blue bottle salvia selvage pabst la croix post-ironic waistcoat hexagon yr mixtape vape blog church-key freegan. Viral drinking vinegar 3 wolf moon tilde mumblecore heirloom, food truck celiac trust fund salvia venmo. Stumptown tote bag butcher, aesthetic kitsch pour-over man bun raclette messenger bag before they sold out banjo.</p>",
+                "quiz": {
+                    "question": "Art What would happen if Blah Blah Blah Blah",
+                    "options": [
+                        {
+                            "title": "Not sure what would happen…",
+                            "slug": "not-sure-what-would-happen"
+                        },
+                        {
+                            "title": "I dont care what would happen!",
+                            "slug": "i-dont-care-what-would-happen"
+                        }
+                    ]
+                },
                 "slug": "art"
             },
             {
@@ -70,6 +91,19 @@
                     }
                 ],
                 "text": "<p>Twee everyday carry four dollar toast, selvage fanny pack echo park leggings lumbersexual cardigan scenester artisan stumptown. Gochujang DIY lumbersexual adaptogen fashion axe humblebrag. Deep v kogi humblebrag, kickstarter etsy single-origin coffee subway tile iPhone tofu 8-bit mustache cornhole readymade. Pork belly vinyl skateboard cred edison bulb coloring book. </p>\n<p>Blue bottle salvia selvage pabst la croix post-ironic waistcoat hexagon yr mixtape vape blog church-key freegan. Viral drinking vinegar 3 wolf moon tilde mumblecore heirloom, food truck celiac trust fund salvia venmo. Stumptown tote bag butcher, aesthetic kitsch pour-over man bun raclette messenger bag before they sold out banjo.</p>",
+                "quiz": {
+                    "question": "Race + Bias A What would happen if Blah Blah Blah Blah",
+                    "options": [
+                        {
+                            "title": "Not sure what would happen…",
+                            "slug": "not-sure-what-would-happen"
+                        },
+                        {
+                            "title": "I dont care what would happen!",
+                            "slug": "i-dont-care-what-would-happen"
+                        }
+                    ]
+                },
                 "slug": "race-bias"
             }
         ],

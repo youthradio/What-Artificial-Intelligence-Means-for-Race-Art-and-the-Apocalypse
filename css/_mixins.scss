@@ -181,3 +181,9 @@
   -webkit-box-shadow: $args;
   -moz-box-shadow: $args;
 }
+@function MAX($numbers...){
+  @return m#{a}x(#{$numbers});
+}
+@function MIN($numbers...){
+  @return m#{i}n(#{$numbers});
+}
