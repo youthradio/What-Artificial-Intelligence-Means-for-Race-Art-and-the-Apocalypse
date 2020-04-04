@@ -28,7 +28,7 @@
         :guests="articleData.guests"
       />
 
-      <PollComponent :question-set="articleData.quiz" />
+      <PollComponent :question-set="section.quiz" />
     </article>
     <h4>
       {{ articleData.about.title }}
@@ -50,7 +50,6 @@ import POSTCONFIG from '~/post.config'
 import FeatureHeaderText from '~/components/Header/FeatureHeaderText'
 import MenuHeader from '~/components/Header/MenuHeader'
 import ShareContainer from '~/components/Custom/ShareContainer'
-import FooterContainer from '~/components/Footer/FooterContainer'
 import PollComponent from '~/components/Custom/PollComponent'
 import VoiceDialog from '~/components/Custom/VoiceDialog.vue'
 
@@ -61,7 +60,6 @@ export default {
     FooterMenu,
     FeatureHeaderText,
     ShareContainer,
-    FooterContainer,
     VoiceDialog,
     PollComponent
   },
