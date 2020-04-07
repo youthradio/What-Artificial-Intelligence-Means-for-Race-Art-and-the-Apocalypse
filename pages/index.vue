@@ -1,5 +1,8 @@
 <template>
-  <div class="container">
+  <div
+    tabindex="0"
+    class="container"
+  >
     <FeatureHeaderText
       :header-data="headerData"
       @onHeaderImgHeight="headerImageHeight = $event"
@@ -7,7 +10,7 @@
     <MenuHeader :offset="headerImageHeight" />
 
     <article>
-      <h4>
+      <h4 id="introduction">
         {{ articleData.introduction.title }}
       </h4>
       <div
@@ -15,32 +18,143 @@
         v-html="articleData.introduction.text"
       />
     </article>
+    <div class="section-table-contents">
+      <div class="margin section-menu-header">
+        <div class="menu-col-l">
+          <a
+            v-for="(section, index) in articleData.sections"
+            :key="section.title"
+            class="menu-row"
+            href="#"
+            @click.prevent="jumpToId(`#section-${index+1}`)"
+          >
+            <h5> Section {{ index + 1 }}</h5>
+            <h3>
+              {{ section.title }}
+            </h3>
+          </a>
+        </div>
+        <div class="menu-col-r">
+          <a
+            class="menu-row"
+            href="#"
+            @click.prevent="jumpToId('#about')"
+          >
+            <h3> {{ articleData.about.title }} </h3>
+          </a>
+          <a
+            class="menu-row"
+            href="#"
+            @click.prevent="jumpToId('#credits')"
+          >
+            <h3>{{ articleData.credits.title }} </h3>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="section-menu-header-container">
+        <div
+          class="relative-top"
+          @click.prevent="toggleMenu"
+        >
+          <span :class="['close-icon', !bmenuSections? 'icon-arrow-bold-down': 'icon-close']" />
 
-    <article
-      v-for="(section, index) in articleData.sections"
-      :key="section.title"
-    >
-      <h5> Section {{ index + 1 }}</h5>
-      <h1>
-        {{ section.title }}
-      </h1>
+          <div class="margin section-menu-fixed">
+            <h5> Section {{ activeSection + 1 }}</h5>
+            <h3>
+              {{ articleData.sections[activeSection].title }}
+            </h3>
+          </div>
+        </div>
+        <div
+          v-if="bmenuSections"
+          class="absolute-top"
+        >
+          <div class="margin section-menu-header">
+            <div class="menu-col-l">
+              <a
+                v-for="(section, index) in articleData.sections"
+                :key="section.title"
+                class="menu-row"
+                href="#"
+                @click.prevent="jumpToId(`#section-${index+1}`)"
+              >
+                <h5> Section {{ index + 1 }}</h5>
+                <h3>
+                  {{ section.title }}
+                </h3>
+              </a>
+            </div>
+            <div class="menu-col-r">
+              <a
+                class="menu-row"
+                href="#"
+                @click.prevent="jumpToId('#introduction')"
+              >
+                <h3> {{ articleData.introduction.title }}</h3>
+              </a>
+              <a
+                class="menu-row"
+                href="#"
+                @click.prevent="jumpToId('#about')"
+              >
+                <h3> {{ articleData.about.title }} </h3>
+              </a>
+              <a
+                class="menu-row"
+                href="#"
+                @click.prevent="jumpToId('#credits')"
+              >
+                <h3>{{ articleData.credits.title }} </h3>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <article>
+        <div
+          v-for="(section, index) in articleData.sections"
+          :key="section.title"
+          ref="section"
+          :data-section-id="index"
+          class="section"
+        >
+          <h5 :id="`section-${index + 1}`">
+            Section {{ index + 1 }}
+          </h5>
+          <h1>
+            {{ section.title }}
+          </h1>
+          <div
+            class="multi-col"
+            v-html="section.text"
+          />
+          <VoiceDialog
+            :audios="section.audio"
+            :dialogs="tracks.get(section.key)"
+            :guests="articleData.guests"
+          />
+        </div>
+      </article>
+    </div>
+    <article>
+      <h4 id="about">
+        {{ articleData.about.title }}
+      </h4>
       <div
         class="multi-col"
-        v-html="section.text"
+        v-html="articleData.about.text"
       />
-      <VoiceDialog
-        :audios="section.audio"
-        :dialogs="tracks.get(section.key)"
-        :guests="articleData.guests"
+      <h4 id="credits">
+        {{ articleData.credits.title }}
+      </h4>
+      <div
+        class="multi-col"
+        v-html="articleData.credits.text"
       />
     </article>
-    <h4>
-      {{ articleData.about.title }}
-    </h4>
-    <div
-      class="multi-col"
-      v-html="articleData.about.text"
-    />
+
     <ShareContainer />
     <FooterMenu />
     <FooterEmailSubscribe />
@@ -80,7 +194,9 @@ export default {
   },
   data () {
     return {
-      headerImageHeight: 0
+      headerImageHeight: 0,
+      bmenuSections: false,
+      activeSection: 0
     }
   },
   computed: {
@@ -101,9 +217,23 @@ export default {
 
   },
   mounted () {
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.intersectionRatio >= 0.3) {
+          this.activeSection = +entry.target.dataset.sectionId
+        }
+      })
+    }, { threshold: [0.3] })
+    this.$refs.section.map(section => observer.observe(section))
   },
   methods: {
-
+    toggleMenu () {
+      this.bmenuSections = !this.bmenuSections
+    },
+    jumpToId (id) {
+      this.$el.querySelector(id).scrollIntoView(true)
+      this.bmenuSections = false
+    }
   }
 }
 </script>
@@ -120,16 +250,115 @@ export default {
     column-count: 2;
   }
 }
-h1 {
-  padding-top: 0;
-  font-weight: 800;
-  font-family: "Assistant";
-  font-size: 3rem;
-  @include breakpoint(medium) {
-    font-size: 5rem;
+.container {
+  h1 {
+    padding-top: 0;
+    font-weight: 800;
+    font-family: "Assistant";
+    font-size: 3rem;
+    @include breakpoint(medium) {
+      font-size: 5rem;
+    }
+  }
+
+  h4,
+  h5 {
+    padding: 0rem;
+    &[id]::before {
+      content: "";
+      display: block;
+      height: 130px;
+      margin-top: -130px;
+      visibility: hidden;
+    }
   }
 }
-h5 {
-  padding: 0rem;
+.margin {
+  position: relative;
+  max-width: 40rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-menu-header-container {
+  position: sticky;
+  z-index: 20;
+  background-color: $darkblue;
+  color: $white;
+  top: 68px;
+  a {
+    color: $white;
+    border-bottom: unset;
+  }
+  h5,
+  h3 {
+    display: inline;
+    padding: 0.2em;
+  }
+  h5 {
+    font-size: 0.2rem;
+    @include breakpoint(medium) {
+      font-size: 0.5rem;
+    }
+  }
+  h3 {
+    font-size: 0.9rem;
+    @include breakpoint(medium) {
+      font-size: 1rem;
+    }
+  }
+  .absolute-top {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    background-color: $darkblue;
+  }
+  .close-icon {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    padding: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .section-menu-fixed {
+    display: flex;
+    align-items: center;
+    h5,
+    h3 {
+      display: inline;
+      padding: 0.5rem 0.2rem 0.5rem 0.2rem;
+    }
+  }
+}
+
+.section-menu-header {
+  padding-bottom: 1rem;
+  @include breakpoint(medium) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "left right";
+  }
+  .menu-row {
+    display: flex;
+    align-items: center;
+  }
+  .menu-col-l {
+    grid-area: left;
+  }
+  .menu-col-r {
+    grid-area: right;
+  }
+}
+.section-table-contents {
+  background-color: $grey;
+  min-height: 100vh;
+  display: flex;
+  place-items: center;
+  .menu-row {
+    display: unset;
+  }
 }
 </style>

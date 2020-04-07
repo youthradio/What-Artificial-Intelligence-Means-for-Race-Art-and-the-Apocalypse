@@ -5,7 +5,7 @@
   "author": "Radames Ajna",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "nuxt --hostname 192.168.7.152",
     "build": "nuxt build",
     "start": "nuxt start",
     "deploy": "nuxt generate && rm -rf _site/* && cp -R dist/ _site/ && cp -R .github _site/",
