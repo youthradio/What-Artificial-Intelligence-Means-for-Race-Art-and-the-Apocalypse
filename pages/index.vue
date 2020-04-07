@@ -135,6 +135,7 @@
             :dialogs="tracks.get(section.key)"
             :guests="articleData.guests"
           />
+          <PollComponent :question-set="section.quiz" />
         </div>
       </article>
     </div>
@@ -173,6 +174,7 @@ import FeatureHeaderText from '~/components/Header/FeatureHeaderText'
 import MenuHeader from '~/components/Header/MenuHeader'
 import ShareContainer from '~/components/Custom/ShareContainer'
 import VoiceDialog from '~/components/Custom/VoiceDialog.vue'
+import PollComponent from '~/components/Custom/PollComponent'
 
 export default {
   components: {
@@ -181,7 +183,8 @@ export default {
     FooterMenu,
     FeatureHeaderText,
     ShareContainer,
-    VoiceDialog
+    VoiceDialog,
+    PollComponent
   },
   mixins: [
     CommonUtils
