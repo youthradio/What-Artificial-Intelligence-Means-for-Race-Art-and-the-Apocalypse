@@ -32,6 +32,9 @@
             <h3>
               {{ section.title }}
             </h3>
+            <h4 v-if="section.subtitle">
+              {{ section.subtitle }}
+            </h4>
           </a>
         </div>
         <div class="menu-col-r">
@@ -63,8 +66,11 @@
           <div class="margin section-menu-fixed">
             <h5> Section {{ activeSection + 1 }}</h5>
             <h3>
-              {{ articleData.sections[activeSection].title }}
+              {{ activeSectionData.title }}
             </h3>
+            <h4 v-if="activeSectionData.subtitle">
+              {{ activeSectionData.subtitle }}
+            </h4>
           </div>
         </div>
         <div
@@ -81,9 +87,14 @@
                 @click.prevent="jumpToId(`#section-${index+1}`)"
               >
                 <h5> Section {{ index + 1 }}</h5>
-                <h3>
-                  {{ section.title }}
-                </h3>
+                <div>
+                  <h3>
+                    {{ section.title }}
+                  </h3>
+                  <h4 v-if="section.subtitle">
+                    {{ section.subtitle }}
+                  </h4>
+                </div>
               </a>
             </div>
             <div class="menu-col-r">
@@ -126,16 +137,23 @@
           <h1>
             {{ section.title }}
           </h1>
+          <h2 v-if="section.subtitle">
+            {{ section.subtitle }}
+          </h2>
           <div
             class="multi-col"
             v-html="section.text"
           />
-          <VoiceDialog
-            :audios="section.audio"
-            :dialogs="tracks.get(section.key)"
-            :guests="articleData.guests"
-          />
-          <PollComponent :question-set="section.quiz" />
+          <template v-if="section.audio.length">
+            <VoiceDialog
+              :audios="section.audio"
+              :dialogs="tracks.get(section.key)"
+              :guests="articleData.guests"
+            />
+          </template>
+          <template v-if="section.quiz">
+            <PollComponent :question-set="section.quiz" />
+          </template>
         </div>
       </article>
     </div>
@@ -203,6 +221,9 @@ export default {
     }
   },
   computed: {
+    activeSectionData () {
+      return this.articleData.sections[this.activeSection]
+    },
     headerData () {
       return {
         featureImage: POSTCONFIG.featureImagePath,
@@ -256,12 +277,16 @@ export default {
 .container {
   h1 {
     padding-top: 0;
+    padding-bottom: 0;
     font-weight: 800;
     font-family: "Assistant";
     font-size: 3rem;
     @include breakpoint(medium) {
       font-size: 5rem;
     }
+  }
+  h2 {
+    padding-top: 0;
   }
 
   h4,
@@ -295,15 +320,25 @@ export default {
     color: $white;
     border-bottom: unset;
   }
-  h5,
-  h3 {
-    display: inline;
-    padding: 0.2em;
+  h3,
+  h4,
+  h5 {
+    padding: 0;
+    margin-top: 0.1rem;
+    margin-right: 0.5rem;
   }
   h5 {
+    display: inline;
     font-size: 0.2rem;
     @include breakpoint(medium) {
       font-size: 0.5rem;
+    }
+  }
+  h4 {
+    font-size: 0.3rem;
+    @include breakpoint(medium) {
+      font-size: 0.6rem;
+      font-weight: bold;
     }
   }
   h3 {
@@ -329,16 +364,16 @@ export default {
   .section-menu-fixed {
     display: flex;
     align-items: center;
-    h5,
-    h3 {
-      display: inline;
-      padding: 0.5rem 0.2rem 0.5rem 0.2rem;
-    }
   }
 }
 
 .section-menu-header {
   padding-bottom: 1rem;
+  h3,
+  h4,
+  h5 {
+    padding: 0;
+  }
   @include breakpoint(medium) {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -346,7 +381,7 @@ export default {
   }
   .menu-row {
     display: flex;
-    align-items: center;
+    // align-items: center;
   }
   .menu-col-l {
     grid-area: left;
@@ -361,7 +396,11 @@ export default {
   display: flex;
   place-items: center;
   .menu-row {
-    display: unset;
+    display: block;
+    padding-bottom: 1rem;
+  }
+  a {
+    border-bottom: unset;
   }
 }
 </style>
