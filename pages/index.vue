@@ -1,5 +1,8 @@
 <template>
-  <div class="container">
+  <div
+    tabindex="0"
+    class="container"
+  >
     <FeatureHeaderText
       :header-data="headerData"
       @onHeaderImgHeight="headerImageHeight = $event"
@@ -7,33 +10,168 @@
     <MenuHeader :offset="headerImageHeight" />
 
     <article>
-      <h4>
+      <h4 id="introduction">
         {{ articleData.introduction.title }}
       </h4>
       <div class="multi-col" v-html="articleData.introduction.text" />
     </article>
+    <div class="section-table-contents">
+      <div class="margin section-menu-header">
+        <div class="menu-col-l">
+          <a
+            v-for="(section, index) in articleData.sections"
+            :key="section.title"
+            class="menu-row"
+            href="#"
+            @click.prevent="jumpToId(`#section-${index+1}`)"
+          >
+            <h5> Section {{ index + 1 }}</h5>
+            <h3>
+              {{ section.title }}
+            </h3>
+            <h4 v-if="section.subtitle">
+              {{ section.subtitle }}
+            </h4>
+          </a>
+        </div>
+        <div class="menu-col-r">
+          <a
+            class="menu-row"
+            href="#"
+            @click.prevent="jumpToId('#about')"
+          >
+            <h3> {{ articleData.about.title }} </h3>
+          </a>
+          <a
+            class="menu-row"
+            href="#"
+            @click.prevent="jumpToId('#credits')"
+          >
+            <h3>{{ articleData.credits.title }} </h3>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="section-menu-header-container">
+        <div
+          class="relative-top"
+          @click.prevent="toggleMenu"
+        >
+          <span :class="['close-icon', !bmenuSections? 'icon-arrow-bold-down': 'icon-close']" />
 
-    <article
-      v-for="(section, index) in articleData.sections"
-      :key="section.title"
-    >
-      <h5>Section {{ index + 1 }}</h5>
-      <h1>
-        {{ section.title }}
-      </h1>
-      <div class="multi-col" v-html="section.text" />
-      <VoiceDialog
-        :audios="section.audio"
-        :dialogs="tracks.get(section.key)"
-        :guests="articleData.guests"
+          <div class="margin section-menu-fixed">
+            <h5> Section {{ activeSection + 1 }}</h5>
+            <h3>
+              {{ activeSectionData.title }}
+            </h3>
+            <h4 v-if="activeSectionData.subtitle">
+              {{ activeSectionData.subtitle }}
+            </h4>
+          </div>
+        </div>
+        <div
+          v-if="bmenuSections"
+          class="absolute-top"
+        >
+          <div class="margin section-menu-header">
+            <div class="menu-col-l">
+              <a
+                v-for="(section, index) in articleData.sections"
+                :key="section.title"
+                class="menu-row"
+                href="#"
+                @click.prevent="jumpToId(`#section-${index+1}`)"
+              >
+                <h5> Section {{ index + 1 }}</h5>
+                <div>
+                  <h3>
+                    {{ section.title }}
+                  </h3>
+                  <h4 v-if="section.subtitle">
+                    {{ section.subtitle }}
+                  </h4>
+                </div>
+              </a>
+            </div>
+            <div class="menu-col-r">
+              <a
+                class="menu-row"
+                href="#"
+                @click.prevent="jumpToId('#introduction')"
+              >
+                <h3> {{ articleData.introduction.title }}</h3>
+              </a>
+              <a
+                class="menu-row"
+                href="#"
+                @click.prevent="jumpToId('#about')"
+              >
+                <h3> {{ articleData.about.title }} </h3>
+              </a>
+              <a
+                class="menu-row"
+                href="#"
+                @click.prevent="jumpToId('#credits')"
+              >
+                <h3>{{ articleData.credits.title }} </h3>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <article>
+        <div
+          v-for="(section, index) in articleData.sections"
+          :key="section.title"
+          ref="section"
+          :data-section-id="index"
+          class="section"
+        >
+          <h5 :id="`section-${index + 1}`">
+            Section {{ index + 1 }}
+          </h5>
+          <h1>
+            {{ section.title }}
+          </h1>
+          <h2 v-if="section.subtitle">
+            {{ section.subtitle }}
+          </h2>
+          <div
+            class="multi-col"
+            v-html="section.text"
+          />
+          <template v-if="section.audio.length">
+            <VoiceDialog
+              :audios="section.audio"
+              :dialogs="tracks.get(section.key)"
+              :guests="articleData.guests"
+            />
+          </template>
+          <template v-if="section.quiz">
+            <PollComponent :question-set="section.quiz" />
+          </template>
+        </div>
+      </article>
+    </div>
+    <article>
+      <h4 id="about">
+        {{ articleData.about.title }}
+      </h4>
+      <div
+        class="multi-col"
+        v-html="articleData.about.text"
+      />
+      <h4 id="credits">
+        {{ articleData.credits.title }}
+      </h4>
+      <div
+        class="multi-col"
+        v-html="articleData.credits.text"
       />
 
       <PollComponent :question-set="section.quiz" />
     </article>
-    <h4>
-      {{ articleData.about.title }}
-    </h4>
-    <div class="multi-col" v-html="articleData.about.text" />
     <ShareContainer />
     <FooterMenu />
     <FooterEmailSubscribe />
@@ -52,6 +190,7 @@ import MenuHeader from '~/components/Header/MenuHeader'
 import ShareContainer from '~/components/Custom/ShareContainer'
 import PollComponent from '~/components/Custom/PollComponent'
 import VoiceDialog from '~/components/Custom/VoiceDialog.vue'
+import PollComponent from '~/components/Custom/PollComponent'
 
 export default {
   components: {
@@ -72,10 +211,15 @@ export default {
   },
   data () {
     return {
-      headerImageHeight: 0
+      headerImageHeight: 0,
+      bmenuSections: false,
+      activeSection: 0
     }
   },
   computed: {
+    activeSectionData () {
+      return this.articleData.sections[this.activeSection]
+    },
     headerData () {
       return {
         featureImage: POSTCONFIG.featureImagePath,
@@ -89,9 +233,28 @@ export default {
       }
     }
   },
-  watch: {},
-  mounted () {},
-  methods: {}
+  watch: {
+
+  },
+  mounted () {
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.intersectionRatio >= 0.3) {
+          this.activeSection = +entry.target.dataset.sectionId
+        }
+      })
+    }, { threshold: [0.3] })
+    this.$refs.section.map(section => observer.observe(section))
+  },
+  methods: {
+    toggleMenu () {
+      this.bmenuSections = !this.bmenuSections
+    },
+    jumpToId (id) {
+      this.$el.querySelector(id).scrollIntoView(true)
+      this.bmenuSections = false
+    }
+  }
 }
 </script>
 
@@ -107,16 +270,133 @@ export default {
     column-count: 2;
   }
 }
-h1 {
-  padding-top: 0;
-  font-weight: 800;
-  font-family: "Assistant";
-  font-size: 3rem;
-  @include breakpoint(medium) {
-    font-size: 5rem;
+.container {
+  h1 {
+    padding-top: 0;
+    padding-bottom: 0;
+    font-weight: 800;
+    font-family: "Assistant";
+    font-size: 3rem;
+    @include breakpoint(medium) {
+      font-size: 5rem;
+    }
+  }
+  h2 {
+    padding-top: 0;
+  }
+
+  h4,
+  h5 {
+    padding: 0rem;
+    &[id]::before {
+      content: "";
+      display: block;
+      height: 130px;
+      margin-top: -130px;
+      visibility: hidden;
+    }
   }
 }
-h5 {
-  padding: 0rem;
+.margin {
+  position: relative;
+  max-width: 40rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-menu-header-container {
+  position: sticky;
+  z-index: 20;
+  background-color: $darkblue;
+  color: $white;
+  top: 68px;
+  a {
+    color: $white;
+    border-bottom: unset;
+  }
+  h3,
+  h4,
+  h5 {
+    padding: 0;
+    margin-top: 0.1rem;
+    margin-right: 0.5rem;
+  }
+  h5 {
+    display: inline;
+    font-size: 0.2rem;
+    @include breakpoint(medium) {
+      font-size: 0.5rem;
+    }
+  }
+  h4 {
+    font-size: 0.3rem;
+    @include breakpoint(medium) {
+      font-size: 0.6rem;
+      font-weight: bold;
+    }
+  }
+  h3 {
+    font-size: 0.9rem;
+    @include breakpoint(medium) {
+      font-size: 1rem;
+    }
+  }
+  .absolute-top {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    background-color: $darkblue;
+  }
+  .close-icon {
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    padding: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .section-menu-fixed {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.section-menu-header {
+  padding-bottom: 1rem;
+  h3,
+  h4,
+  h5 {
+    padding: 0;
+  }
+  @include breakpoint(medium) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "left right";
+  }
+  .menu-row {
+    display: flex;
+    // align-items: center;
+  }
+  .menu-col-l {
+    grid-area: left;
+  }
+  .menu-col-r {
+    grid-area: right;
+  }
+}
+.section-table-contents {
+  background-color: $grey;
+  min-height: 100vh;
+  display: flex;
+  place-items: center;
+  .menu-row {
+    display: block;
+    padding-bottom: 1rem;
+  }
+  a {
+    border-bottom: unset;
+  }
 }
 </style>
