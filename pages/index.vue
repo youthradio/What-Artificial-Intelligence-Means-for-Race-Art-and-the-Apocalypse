@@ -190,7 +190,6 @@ import MenuHeader from '~/components/Header/MenuHeader'
 import ShareContainer from '~/components/Custom/ShareContainer'
 import PollComponent from '~/components/Custom/PollComponent'
 import VoiceDialog from '~/components/Custom/VoiceDialog.vue'
-import PollComponent from '~/components/Custom/PollComponent'
 
 export default {
   components: {
