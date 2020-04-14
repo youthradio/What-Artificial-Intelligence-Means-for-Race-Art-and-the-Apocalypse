@@ -19,7 +19,7 @@
       />
     </article>
     <div class="section-table-contents">
-      <div class="margin section-menu-header">
+      <div class="global-margin section-menu-header">
         <div class="menu-col-l">
           <a
             v-for="(section, index) in articleData.sections"
@@ -63,7 +63,7 @@
         >
           <span :class="['close-icon', !bmenuSections? 'icon-arrow-bold-down': 'icon-close']" />
 
-          <div class="margin section-menu-fixed">
+          <div class="global-margin section-menu-fixed">
             <h5> Section {{ activeSection + 1 }}</h5>
             <h3>
               {{ activeSectionData.title }}
@@ -77,7 +77,7 @@
           v-if="bmenuSections"
           class="absolute-top"
         >
-          <div class="margin section-menu-header">
+          <div class="global-margin section-menu-header">
             <div class="menu-col-l">
               <a
                 v-for="(section, index) in articleData.sections"
@@ -129,7 +129,7 @@
           :key="section.title"
           ref="section"
           :data-section-id="index"
-          class="section"
+          class="section top-margin"
         >
           <h5 :id="`section-${index + 1}`">
             Section {{ index + 1 }}
@@ -141,14 +141,21 @@
             {{ section.subtitle }}
           </h2>
           <div
-            class="multi-col"
+            class="multi-col top-margin"
             v-html="section.text"
           />
           <template v-if="section.audio.length">
             <VoiceDialog
+              class="top-margin"
               :audios="section.audio"
               :dialogs="tracks.get(section.key)"
               :guests="articleData.guests"
+            />
+          </template>
+          <template v-if="section.dialogue && section.dialogue.length">
+            <TextDialog
+              class="top-margin"
+              :dialogs="section.dialogue"
             />
           </template>
           <template v-if="section.quiz">
@@ -192,6 +199,7 @@ import FeatureHeaderText from '~/components/Header/FeatureHeaderText'
 import MenuHeader from '~/components/Header/MenuHeader'
 import ShareContainer from '~/components/Custom/ShareContainer'
 import VoiceDialog from '~/components/Custom/VoiceDialog.vue'
+import TextDialog from '~/components/Custom/TextDialog.vue'
 import PollComponent from '~/components/Custom/PollComponent'
 
 export default {
@@ -202,6 +210,7 @@ export default {
     FeatureHeaderText,
     ShareContainer,
     VoiceDialog,
+    TextDialog,
     PollComponent
   },
   mixins: [
@@ -301,7 +310,7 @@ export default {
     }
   }
 }
-.margin {
+.global-margin {
   position: relative;
   max-width: 40rem;
   padding-left: 1rem;
@@ -309,7 +318,9 @@ export default {
   margin-left: auto;
   margin-right: auto;
 }
-
+.top-margin {
+  margin-top: 1rem;
+}
 .section-menu-header-container {
   position: sticky;
   z-index: 20;
