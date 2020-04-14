@@ -48,7 +48,7 @@ export default {
       { rel: 'shortcut icon', href: 'favicon/favicon-32x32.png' },
       { rel: 'manifest', href: 'favicon/site.webmanifest' },
       { rel: 'mask-icon', color: '#5bbad5', href: 'favicon/safari-pinned-tab.svg' },
-      { rel: 'stylesheet', href: 'https://yr.media/statics/yr-media-typography/yr-typography.css' }
+      { rel: 'stylesheet', href: 'https://yr.media/statics/yr-media-typography/yr-typography.css', media: 'print', onload: "this.media='all'" }
     ]
   },
   /*
