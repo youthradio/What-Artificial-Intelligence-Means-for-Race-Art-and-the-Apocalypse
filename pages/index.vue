@@ -23,7 +23,7 @@
         <div class="menu-col-l">
           <a
             v-for="(section, index) in articleData.sections"
-            :key="section.title"
+            :key="section.title + section.subtitle"
             class="menu-row"
             href="#"
             @click.prevent="jumpToId(`#section-${index+1}`)"
@@ -81,7 +81,7 @@
             <div class="menu-col-l">
               <a
                 v-for="(section, index) in articleData.sections"
-                :key="section.title"
+                :key="section.title + section.subtitle"
                 class="menu-row"
                 href="#"
                 @click.prevent="jumpToId(`#section-${index+1}`)"
@@ -126,7 +126,7 @@
       <article>
         <div
           v-for="(section, index) in articleData.sections"
-          :key="section.title"
+          :key="section.title + section.subtitle"
           ref="section"
           :data-section-id="index"
           class="section top-margin"
