@@ -5,7 +5,7 @@ export default {
   publishDate: 'April. 20, 2020',
   location: 'Oakland, CA',
   description: 'SEO friendly Description',
-  url: 'CANONICAL URL',
+  url: 'https://interactive.yr.media/MOVERS_SHAKERS',
   featureImage:
     'https://interactive.yr.media/college-app-guide/images/college-guide-featurex1875.jpg',
   featureImagePath: 'images/feature',

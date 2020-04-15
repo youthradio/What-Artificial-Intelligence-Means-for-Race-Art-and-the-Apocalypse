@@ -9,12 +9,12 @@
     />
     <MenuHeader :offset="headerImageHeight" />
 
-    <article>
+    <article class="top-margin">
       <h4 id="introduction">
         {{ articleData.introduction.title }}
       </h4>
       <div
-        class="multi-col"
+        class="multi-col top-margin"
         v-html="articleData.introduction.text"
       />
     </article>
@@ -22,7 +22,7 @@
       <div class="global-margin section-menu-header">
         <div class="menu-col-l">
           <a
-            v-for="(section, index) in articleData.sections"
+            v-for="(section, index) in articleData.sections.slice(0,3)"
             :key="section.title + section.subtitle"
             class="menu-row"
             href="#"
@@ -32,25 +32,37 @@
             <h3>
               {{ section.title }}
             </h3>
-            <h4 v-if="section.subtitle">
-              {{ section.subtitle }}
-            </h4>
           </a>
         </div>
         <div class="menu-col-r">
           <a
+            v-for="(section, index) in articleData.sections.slice(3)"
+            :key="section.title + section.subtitle"
             class="menu-row"
+            href="#"
+            @click.prevent="jumpToId(`#section-${index+4}`)"
+          >
+            <h5> Section {{ index + 4 }}</h5>
+            <h3>
+              {{ section.title }}
+            </h3>
+            <h4 v-if="section.subtitle">
+              {{ section.subtitle }}
+            </h4>
+          </a>
+          <a
+            class="menu-row no-padding"
             href="#"
             @click.prevent="jumpToId('#about')"
           >
-            <h3> {{ articleData.about.title }} </h3>
+            <h5> {{ articleData.about.title }} </h5>
           </a>
           <a
-            class="menu-row"
+            class="menu-row no-padding"
             href="#"
             @click.prevent="jumpToId('#credits')"
           >
-            <h3>{{ articleData.credits.title }} </h3>
+            <h5>{{ articleData.credits.title }} </h5>
           </a>
         </div>
       </div>
@@ -80,7 +92,7 @@
           <div class="global-margin section-menu-header">
             <div class="menu-col-l">
               <a
-                v-for="(section, index) in articleData.sections"
+                v-for="(section, index) in articleData.sections.slice(0,3)"
                 :key="section.title + section.subtitle"
                 class="menu-row"
                 href="#"
@@ -91,33 +103,47 @@
                   <h3>
                     {{ section.title }}
                   </h3>
-                  <h4 v-if="section.subtitle">
-                    {{ section.subtitle }}
-                  </h4>
                 </div>
               </a>
             </div>
             <div class="menu-col-r">
               <a
+                v-for="(section, index) in articleData.sections.slice(3)"
+                :key="section.title + section.subtitle"
                 class="menu-row"
+                href="#"
+                @click.prevent="jumpToId(`#section-${index+4}`)"
+              >
+                <h5> Section {{ index + 4 }}</h5>
+                <div>
+                  <h3>
+                    {{ section.title }}
+                  </h3>
+                  <h4 v-if="section.subtitle">
+                    {{ section.subtitle }}
+                  </h4>
+                </div>
+              </a>
+              <a
+                class="menu-row no-padding"
                 href="#"
                 @click.prevent="jumpToId('#introduction')"
               >
-                <h3> {{ articleData.introduction.title }}</h3>
+                <h5> {{ articleData.introduction.title }}</h5>
               </a>
               <a
-                class="menu-row"
+                class="menu-row no-padding"
                 href="#"
                 @click.prevent="jumpToId('#about')"
               >
-                <h3> {{ articleData.about.title }} </h3>
+                <h5> {{ articleData.about.title }} </h5>
               </a>
               <a
-                class="menu-row"
+                class="menu-row no-padding"
                 href="#"
                 @click.prevent="jumpToId('#credits')"
               >
-                <h3>{{ articleData.credits.title }} </h3>
+                <h5>{{ articleData.credits.title }} </h5>
               </a>
             </div>
           </div>
@@ -169,14 +195,14 @@
         {{ articleData.about.title }}
       </h4>
       <div
-        class="multi-col"
+        class="multi-col top-margin"
         v-html="articleData.about.text"
       />
       <h4 id="credits">
         {{ articleData.credits.title }}
       </h4>
       <div
-        class="multi-col"
+        class="multi-col top-margin"
         v-html="articleData.credits.text"
       />
     </article>
@@ -288,7 +314,6 @@ export default {
     padding-top: 0;
     padding-bottom: 0;
     font-weight: 800;
-    font-family: "Assistant";
     font-size: 3rem;
     @include breakpoint(medium) {
       font-size: 5rem;
@@ -296,6 +321,7 @@ export default {
   }
   h2 {
     padding-top: 0;
+    padding-bottom: 0;
   }
 
   h4,
@@ -318,9 +344,6 @@ export default {
   margin-left: auto;
   margin-right: auto;
 }
-.top-margin {
-  margin-top: 1rem;
-}
 .section-menu-header-container {
   position: sticky;
   z-index: 20;
@@ -334,9 +357,7 @@ export default {
   h3,
   h4,
   h5 {
-    padding: 0;
-    margin-top: 0.1rem;
-    margin-right: 0.5rem;
+    padding: 0 0.5rem 0 0.5rem;
   }
   h5 {
     display: inline;
@@ -368,7 +389,8 @@ export default {
     cursor: pointer;
     position: absolute;
     right: 0;
-    padding: 0.5rem;
+    margin-right: 35px;
+    font-size: 0.6em;
     top: 50%;
     transform: translateY(-50%);
   }
@@ -379,19 +401,21 @@ export default {
 }
 
 .section-menu-header {
-  padding-bottom: 1rem;
+  padding: 1rem 0 1rem 0;
   h3,
   h4,
   h5 {
-    padding: 0;
+    padding: 0 0.5rem 0 0.5rem;
   }
   @include breakpoint(medium) {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-areas: "left right";
+    grid-gap: 5rem;
   }
   .menu-row {
     display: flex;
+    padding-bottom: 1rem;
     // align-items: center;
   }
   .menu-col-l {
@@ -403,7 +427,7 @@ export default {
 }
 .section-table-contents {
   background-color: $grey;
-  min-height: 100vh;
+  min-height: 60vh;
   display: flex;
   place-items: center;
   .menu-row {
@@ -413,5 +437,11 @@ export default {
   a {
     border-bottom: unset;
   }
+}
+.top-margin {
+  margin-top: 1rem;
+}
+.no-padding {
+  padding-bottom: 0 !important;
 }
 </style>

@@ -26,27 +26,6 @@ html {
   background-color: $baseBackColor;
   color: $baseFontColor;
 }
-
-h3 {
-  font-weight: 100;
-  font-family: $baseFontHeaders;
-  letter-spacing: 1.84px;
-  // text-transform: uppercase;
-  // color: $black;
-}
-
-h4 {
-  font-weight: 300;
-  font-family: $baseFontHeaders;
-  // text-transform: uppercase;
-  letter-spacing: 2px;
-}
-h5 {
-  font-weight: 300;
-  font-family: $baseFontHeaders;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
 a {
   color: $baseFontColor;
   border-bottom: 2px solid rgba($green, 0.3);
@@ -67,7 +46,7 @@ html {
   box-sizing: inherit;
 }
 article {
-  max-width: 40rem;
+  max-width: 35rem;
   padding-left: 1rem;
   padding-right: 1rem;
   margin-left: auto;
@@ -184,4 +163,26 @@ code {
 
 .hug {
   margin-top: 0;
+}
+
+// custom
+h3 {
+  font-weight: 800;
+  font-family: $baseFontHeaders;
+  letter-spacing: 1.84px;
+  // text-transform: uppercase;
+  // color: $black;
+}
+
+h4 {
+  font-weight: 300;
+  font-family: $baseFontHeaders;
+  // text-transform: uppercase;
+  letter-spacing: 2px;
+}
+h5 {
+  font-weight: 300;
+  font-family: $header5FontFamily;
+  text-transform: capitalize;
+  letter-spacing: 1px;
 }
