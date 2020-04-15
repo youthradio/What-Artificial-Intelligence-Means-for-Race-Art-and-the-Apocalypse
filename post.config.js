@@ -5,9 +5,9 @@ export default {
   publishDate: 'April. 20, 2020',
   location: 'Oakland, CA',
   description: 'SEO friendly Description',
-  url: 'https://interactive.yr.media/MOVERS_SHAKERS',
+  url: 'https://interactive.yr.media/the-dread-play-artificial-Intelligence',
   featureImage:
-    'https://interactive.yr.media/college-app-guide/images/college-guide-featurex1875.jpg',
+    'https://interactive.yr.media/the-dread-play-artificial-Intelligence/images/feature_image.jpg',
   featureImagePath: 'images/feature',
   featureImageDescription: 'Woman looking at kiosk.',
   featureImageCaption: '(Photo: Andersen Ross Photography Inc/Getty Images)',
