@@ -204,9 +204,16 @@
         {{ articleData.credits.title }}
       </h5>
       <div
-        class="multi-col top-margin"
-        v-html="articleData.credits.text"
-      />
+        class="top-margin"
+      >
+        <div
+          v-for="person in articleData.credits.people"
+          :key="person.names"
+          class="credits"
+        >
+          <span> {{ person.title }}: </span> {{ person.names }}
+        </div>
+      </div>
     </article>
 
     <ShareContainer />
@@ -458,5 +465,11 @@ a:hover {
 }
 .margin-left {
   margin-left: 0.5rem;
+}
+.credits{
+  font-size: 0.8rem;
+  span {
+    font-weight: 800;
+  }
 }
 </style>
