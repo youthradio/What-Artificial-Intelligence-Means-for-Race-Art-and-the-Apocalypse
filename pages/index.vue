@@ -77,12 +77,14 @@
 
           <div class="global-margin section-menu-fixed">
             <h5> Section {{ activeSection + 1 }}</h5>
-            <h3>
-              {{ activeSectionData.title }}
-            </h3>
-            <h4 v-if="activeSectionData.subtitle">
-              {{ activeSectionData.subtitle }}
-            </h4>
+            <div class="margin-left">
+              <h3>
+                {{ activeSectionData.title }}
+              </h3>
+              <h4 v-if="activeSectionData.subtitle">
+                {{ activeSectionData.subtitle }}
+              </h4>
+            </div>
           </div>
         </div>
         <div
@@ -99,7 +101,7 @@
                 @click.prevent="jumpToId(`#section-${index+1}`)"
               >
                 <h5> Section {{ index + 1 }}</h5>
-                <div>
+                <div class="margin-left">
                   <h3>
                     {{ section.title }}
                   </h3>
@@ -115,7 +117,7 @@
                 @click.prevent="jumpToId(`#section-${index+4}`)"
               >
                 <h5> Section {{ index + 4 }}</h5>
-                <div>
+                <div class="margin-left">
                   <h3>
                     {{ section.title }}
                   </h3>
@@ -191,16 +193,16 @@
       </article>
     </div>
     <article>
-      <h4 id="about">
+      <h5 id="about">
         {{ articleData.about.title }}
-      </h4>
+      </h5>
       <div
         class="multi-col top-margin"
         v-html="articleData.about.text"
       />
-      <h4 id="credits">
+      <h5 id="credits">
         {{ articleData.credits.title }}
-      </h4>
+      </h5>
       <div
         class="multi-col top-margin"
         v-html="articleData.credits.text"
@@ -301,7 +303,9 @@ export default {
 @import "~@/css/vars";
 @import "~@/css/base";
 @import "~@/css/mixins";
-
+a:hover {
+  background-color: $lightpurple;
+}
 .multi-col {
   column-count: 1;
 
@@ -338,7 +342,7 @@ export default {
 }
 .global-margin {
   position: relative;
-  max-width: 40rem;
+  max-width: 35rem;
   padding-left: 1rem;
   padding-right: 1rem;
   margin-left: auto;
@@ -357,7 +361,7 @@ export default {
   h3,
   h4,
   h5 {
-    padding: 0 0.5rem 0 0.5rem;
+    padding: 0;
   }
   h5 {
     display: inline;
@@ -401,17 +405,19 @@ export default {
 }
 
 .section-menu-header {
-  padding: 1rem 0 1rem 0;
   h3,
   h4,
   h5 {
-    padding: 0 0.5rem 0 0.5rem;
+    color: $white;
+    padding: 0;
   }
   @include breakpoint(medium) {
     display: grid;
+    width: 100%;
     grid-template-columns: 1fr 1fr;
     grid-template-areas: "left right";
-    grid-gap: 5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
   .menu-row {
     display: flex;
@@ -427,6 +433,12 @@ export default {
 }
 .section-table-contents {
   background-color: $grey;
+  height: 100vh;
+  background: radial-gradient(circle at 25% 10%, #292e49 20%, transparent 100%),
+    radial-gradient(circle at 70% 30%, #6b5b67 50%, transparent 100%),
+    radial-gradient(at 30% 50%, #332849 20%, transparent 100%),
+    radial-gradient(at 70% 90%, #18102c 20%, white 100%);
+
   min-height: 60vh;
   display: flex;
   place-items: center;
@@ -443,5 +455,8 @@ export default {
 }
 .no-padding {
   padding-bottom: 0 !important;
+}
+.margin-left {
+  margin-left: 0.5rem;
 }
 </style>

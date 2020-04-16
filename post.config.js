@@ -2,7 +2,7 @@ export default {
   baseURL: '/the-dread-play-artificial-Intelligence',
   title: 'Investigating the Dread + Play of Artificial Intelligence',
   author: 'Static Author',
-  publishDate: 'April. 20, 2020',
+  publishDate: 'April. 14, 2020',
   location: 'Oakland, CA',
   description: 'SEO friendly Description',
   url: 'https://interactive.yr.media/the-dread-play-artificial-Intelligence',

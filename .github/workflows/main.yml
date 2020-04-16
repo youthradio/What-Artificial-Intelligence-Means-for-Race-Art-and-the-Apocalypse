@@ -16,5 +16,5 @@ jobs:
         key: ${{ secrets.key }}
         port: ${{ secrets.PORT }}
         script: |
-          cd static/static-nuxt-template
+          cd static/the-dread-play-artificial-Intelligence
           git fetch && git reset --hard FETCH_HEAD && git clean -df
