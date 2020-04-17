@@ -28,12 +28,13 @@ html {
 }
 a {
   color: $baseFontColor;
-  border-bottom: 2px solid rgba($green, 0.3);
+  border-bottom: 2px solid rgba($lightpurple, 0.3);
   vertical-align: baseline;
   text-decoration: none;
 }
 a:hover {
-  background-color: $green;
+  background-color: $lightpurple;
+  color: $white;
 }
 
 html {
@@ -131,7 +132,7 @@ h4 {
   font-size: $scale / 1.5 * 1rem;
 }
 h5 {
-  font-size: $scale / 2 * 1rem;
+  font-size: $scale / 1.5 * 1rem;
 }
 h6 {
   font-size: $scale / 4 * 1rem;

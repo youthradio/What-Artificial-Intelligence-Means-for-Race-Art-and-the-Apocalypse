@@ -10,9 +10,9 @@
     <MenuHeader :offset="headerImageHeight" />
 
     <article class="top-margin">
-      <h4 id="introduction">
+      <h5 id="introduction">
         {{ articleData.introduction.title }}
-      </h4>
+      </h5>
       <div
         class="multi-col top-margin"
         v-html="articleData.introduction.text"
@@ -75,7 +75,10 @@
         >
           <span :class="['close-icon', !bmenuSections? 'icon-arrow-bold-down': 'icon-close']" />
 
-          <div class="global-margin section-menu-fixed">
+          <div
+            class="global-margin section-menu-fixed"
+            :style="{visibility: bmenuSections?'hidden': ''}"
+          >
             <h5> Section {{ activeSection + 1 }}</h5>
             <div class="margin-left">
               <h3>
@@ -187,7 +190,10 @@
             />
           </template>
           <template v-if="section.quiz">
-            <PollComponent :question-set="section.quiz" />
+            <PollComponent
+              class="poll-margin"
+              :question-set="section.quiz"
+            />
           </template>
         </div>
       </article>
@@ -203,9 +209,7 @@
       <h5 id="credits">
         {{ articleData.credits.title }}
       </h5>
-      <div
-        class="top-margin"
-      >
+      <div class="top-margin">
         <div
           v-for="person in articleData.credits.people"
           :key="person.names"
@@ -293,6 +297,9 @@ export default {
       })
     }, { threshold: [0.3] })
     this.$refs.section.map(section => observer.observe(section))
+    const base = document.createElement('base')
+    base.setAttribute('target', '_blank')
+    document.head.appendChild(base)
   },
   methods: {
     toggleMenu () {
@@ -356,6 +363,8 @@ a:hover {
   margin-right: auto;
 }
 .section-menu-header-container {
+  cursor: pointer;
+
   position: sticky;
   z-index: 20;
   background-color: $darkblue;
@@ -370,26 +379,26 @@ a:hover {
   h5 {
     padding: 0;
   }
-  h5 {
-    display: inline;
-    font-size: 0.2rem;
-    @include breakpoint(medium) {
-      font-size: 0.5rem;
-    }
-  }
-  h4 {
-    font-size: 0.3rem;
-    @include breakpoint(medium) {
-      font-size: 0.6rem;
-      font-weight: bold;
-    }
-  }
-  h3 {
-    font-size: 0.9rem;
-    @include breakpoint(medium) {
-      font-size: 1rem;
-    }
-  }
+  // h5 {
+  //   display: inline;
+  //   font-size: 0.2rem;
+  //   @include breakpoint(medium) {
+  //     font-size: 0.5rem;
+  //   }
+  // }
+  // h4 {
+  //   font-size: 0.3rem;
+  //   @include breakpoint(medium) {
+  //     font-size: 0.6rem;
+  //     font-weight: bold;
+  //   }
+  // }
+  // h3 {
+  //   font-size: 0.9rem;
+  //   @include breakpoint(medium) {
+  //     font-size: 1rem;
+  //   }
+  // }
   .absolute-top {
     position: absolute;
     top: 100%;
@@ -397,7 +406,6 @@ a:hover {
     background-color: $darkblue;
   }
   .close-icon {
-    cursor: pointer;
     position: absolute;
     right: 0;
     margin-right: 35px;
@@ -408,10 +416,14 @@ a:hover {
   .section-menu-fixed {
     display: flex;
     align-items: center;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
   }
 }
 
 .section-menu-header {
+  padding-bottom: 1rem;
+
   h3,
   h4,
   h5 {
@@ -440,13 +452,12 @@ a:hover {
 }
 .section-table-contents {
   background-color: $grey;
-  height: 100vh;
   background: radial-gradient(circle at 25% 10%, #292e49 20%, transparent 100%),
     radial-gradient(circle at 70% 30%, #6b5b67 50%, transparent 100%),
     radial-gradient(at 30% 50%, #332849 20%, transparent 100%),
     radial-gradient(at 70% 90%, #18102c 20%, white 100%);
 
-  min-height: 60vh;
+  min-height: 50vh;
   display: flex;
   place-items: center;
   .menu-row {
@@ -460,13 +471,17 @@ a:hover {
 .top-margin {
   margin-top: 1rem;
 }
+.poll-margin {
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+}
 .no-padding {
   padding-bottom: 0 !important;
 }
 .margin-left {
   margin-left: 0.5rem;
 }
-.credits{
+.credits {
   font-size: 0.8rem;
   span {
     font-weight: 800;
