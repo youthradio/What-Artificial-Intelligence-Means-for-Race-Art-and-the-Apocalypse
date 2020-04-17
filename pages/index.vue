@@ -180,6 +180,7 @@
               class="top-margin"
               :audios="section.audio"
               :dialogs="tracks.get(section.key)"
+              :section-id="`#section-${index + 1}`"
               :guests="articleData.guests"
             />
           </template>
