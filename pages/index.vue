@@ -19,7 +19,7 @@
       />
     </article>
     <div class="section-table-contents">
-      <div class="global-margin section-menu-header">
+      <div class="global-margin section-menu-header top-margin">
         <div class="menu-col-l">
           <a
             v-for="(section, index) in articleData.sections.slice(0,3)"
