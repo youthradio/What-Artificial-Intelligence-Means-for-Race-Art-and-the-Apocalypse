@@ -82,7 +82,7 @@ function markdown2html (data) {
           }
         }
         // make slugs from titles
-        if (key === 'title') {
+        if (key === 'title' || key === 'subtitle') {
           obj.slug = utils.makeSlug(obj[key])
           configDom = {
             ALLOWED_TAGS: ['br', 'span'],
