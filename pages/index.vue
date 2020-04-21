@@ -84,9 +84,9 @@
               <h3>
                 {{ activeSectionData.title }}
               </h3>
-              <h4 v-if="activeSectionData.subtitle">
+              <!-- <h4 v-if="activeSectionData.subtitle">
                 {{ activeSectionData.subtitle }}
-              </h4>
+              </h4> -->
             </div>
           </div>
         </div>
@@ -200,14 +200,20 @@
       </article>
     </div>
     <article>
-      <h5 id="about">
+      <h5
+        id="about"
+        class="top-margin"
+      >
         {{ articleData.about.title }}
       </h5>
       <div
         class="multi-col top-margin"
         v-html="articleData.about.text"
       />
-      <h5 id="credits">
+      <h5
+        id="credits"
+        class="top-margin"
+      >
         {{ articleData.credits.title }}
       </h5>
       <div class="top-margin">
@@ -417,8 +423,8 @@ a:hover {
   .section-menu-fixed {
     display: flex;
     align-items: center;
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
   }
 }
 
@@ -430,6 +436,13 @@ a:hover {
   h5 {
     color: $white;
     padding: 0;
+  }
+  h3 {
+    // line-height: 1rem;
+  }
+  h4 {
+    letter-spacing: normal;
+    line-height: 0.9rem;
   }
   @include breakpoint(medium) {
     display: grid;
@@ -458,7 +471,7 @@ a:hover {
     radial-gradient(at 30% 50%, #332849 20%, transparent 100%),
     radial-gradient(at 70% 90%, #18102c 20%, white 100%);
 
-  min-height: 50vh;
+  min-height: 100vh;
   display: flex;
   place-items: center;
   .menu-row {
@@ -473,8 +486,8 @@ a:hover {
   margin-top: 1rem;
 }
 .poll-margin {
-  margin-bottom: 2rem;
-  margin-top: 2rem;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
 }
 .no-padding {
   padding-bottom: 0 !important;
