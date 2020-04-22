@@ -16,5 +16,5 @@ jobs:
         key: ${{ secrets.key }}
         port: ${{ secrets.PORT }}
         script: |
-          cd static/What-Artificial-Intelligence-Means-for-Race-Art-and-Apocalypse
+          cd static/What-Artificial-Intelligence-Means-for-Race-Art-and-the-Apocalypse
           git fetch && git reset --hard FETCH_HEAD && git clean -df

@@ -307,6 +307,8 @@ export default {
     const base = document.createElement('base')
     base.setAttribute('target', '_blank')
     document.head.appendChild(base)
+    // ping aws lambda
+    fetch(POSTCONFIG.POLLSERVER)
   },
   methods: {
     toggleMenu () {
