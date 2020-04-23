@@ -212,7 +212,7 @@
       />
       <h5
         id="credits"
-        class="top-margin"
+        class="credits-header"
       >
         {{ articleData.credits.title }}
       </h5>
@@ -341,9 +341,11 @@ a:hover {
     padding-top: 0;
     padding-bottom: 0;
     font-weight: 800;
-    font-size: 3rem;
+    font-size: 2.5rem;
+    line-height: 2rem;
     @include breakpoint(medium) {
-      font-size: 5rem;
+      font-size: 4.5rem;
+      line-height: 3.5rem;
     }
   }
   h2 {
@@ -496,6 +498,9 @@ a:hover {
 }
 .margin-left {
   margin-left: 0.5rem;
+}
+.credits-header {
+  margin-top: 2rem;
 }
 .credits {
   font-size: 0.8rem;
