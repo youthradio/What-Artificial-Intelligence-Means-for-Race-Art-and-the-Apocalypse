@@ -10,8 +10,8 @@ export default {
   mode: 'universal',
 
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   router: {
     base: POSTCONFIG.baseURL
   },
@@ -20,7 +20,11 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: POSTCONFIG.description },
+      {
+        hid: 'description',
+        name: 'description',
+        content: POSTCONFIG.description
+      },
       { property: 'og:title', content: POSTCONFIG.title },
       { property: 'og:site_name', content: POSTCONFIG.title },
       { property: 'og:type', content: 'website' },
@@ -35,34 +39,67 @@ export default {
       { name: 'twitter:title', content: POSTCONFIG.title },
       { name: 'twitter:description', content: POSTCONFIG.description },
       { name: 'twitter:image', content: POSTCONFIG.featureImage },
-      { name: 'twitter:image:alt', content: POSTCONFIG.featureImageDescription },
+      {
+        name: 'twitter:image:alt',
+        content: POSTCONFIG.featureImageDescription
+      },
       { itemprop: 'description', content: POSTCONFIG.description },
       { itemprop: 'image', content: POSTCONFIG.featureImage },
       { name: 'msapplication-TileColor', content: '#da532c' },
       { name: 'theme-color', content: '#ffffff' }
     ],
     link: [
-      { rel: 'icon', type: 'apple-touch-icon', sizes: '180x180', href: 'favicon/apple-touch-icon.png' },
-      { rel: 'icon', type: 'image/png', sizes: '32x32', href: 'favicon/favicon-32x32.png' },
-      { rel: 'icon', type: 'image/png', sizes: '16x16', href: 'favicon/favicon-16x16.png' },
+      {
+        rel: 'icon',
+        type: 'apple-touch-icon',
+        sizes: '180x180',
+        href: 'favicon/apple-touch-icon.png'
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        href: 'favicon/favicon-32x32.png'
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        href: 'favicon/favicon-16x16.png'
+      },
       { rel: 'shortcut icon', href: 'favicon/favicon-32x32.png' },
       { rel: 'manifest', href: 'favicon/site.webmanifest' },
-      { rel: 'mask-icon', color: '#5bbad5', href: 'favicon/safari-pinned-tab.svg' },
-      { rel: 'stylesheet', href: 'https://yr.media/statics/yr-media-typography/yr-typography.css', media: 'print', onload: "this.media='all'" }
+      {
+        rel: 'mask-icon',
+        color: '#5bbad5',
+        href: 'favicon/safari-pinned-tab.svg'
+      },
+      // {
+      //   rel: 'preload stylesheet',
+      //   as: 'font',
+      //   href: 'https://yr.media/statics/yr-media-typography/yr-typography.css'
+      // }
+
+      {
+        href:
+          'https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;600;700;800&family=Roboto+Mono:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap',
+        rel: 'stylesheet'
+      }
+
+      // { rel: 'stylesheet', href: 'https://yr.media/statics/yr-media-typography/yr-typography.css', media: 'print', onload: "this.media='all'" }
     ]
   },
   /*
-  ** Customize the progress-bar color
-  */
+   ** Customize the progress-bar color
+   */
   loading: { color: '#fff' },
   /*
-  ** Global CSS
-  */
-  css: [
-  ],
+   ** Global CSS
+   */
+  css: [],
   /*
-  ** Plugins to load before mounting the App
-  */
+   ** Plugins to load before mounting the App
+   */
   plugins: [
     {
       src: '~plugins/lazysizes.js',
@@ -74,19 +111,16 @@ export default {
     }
   ],
   /*
-  ** Nuxt.js dev-modules
-  */
+   ** Nuxt.js dev-modules
+   */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module'
   ],
   /*
-  ** Nuxt.js modules
-  */
-  modules: [
-    '~/modules/getdata',
-    '@nuxtjs/google-gtag'
-  ],
+   ** Nuxt.js modules
+   */
+  modules: ['~/modules/getdata', '@nuxtjs/google-gtag'],
   'google-gtag': {
     id: 'UA-6029148-3',
     config: {
@@ -99,12 +133,12 @@ export default {
   },
 
   /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     /*
-    ** You can extend webpack config here
-    */
+     ** You can extend webpack config here
+     */
     extend (config, { isDev, isClient, loaders: { vue } }) {
       if (isClient) {
         vue.transformAssetUrls.img = ['data-src', 'src']

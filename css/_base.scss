@@ -169,8 +169,7 @@ code {
 // custom
 h3 {
   font-weight: 800;
-  font-family: $baseFontHeaders;
-  letter-spacing: 1.84px;
+  font-family: $header5FontFamily;
   // text-transform: uppercase;
   // color: $black;
 }
@@ -179,11 +178,9 @@ h4 {
   font-weight: 300;
   font-family: $baseFontHeaders;
   // text-transform: uppercase;
-  letter-spacing: 2px;
 }
 h5 {
   font-weight: 300;
   font-family: $header5FontFamily;
   text-transform: capitalize;
-  letter-spacing: 1px;
 }

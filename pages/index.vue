@@ -344,7 +344,7 @@ a:hover {
     font-size: 2.5rem;
     line-height: 2rem;
     @include breakpoint(medium) {
-      font-size: 4.5rem;
+      font-size: 4rem;
       line-height: 3.5rem;
     }
   }
