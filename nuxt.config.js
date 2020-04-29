@@ -74,11 +74,11 @@ export default {
         color: '#5bbad5',
         href: 'favicon/safari-pinned-tab.svg'
       },
-      // {
-      //   rel: 'preload stylesheet',
-      //   as: 'font',
-      //   href: 'https://yr.media/statics/yr-media-typography/yr-typography.css'
-      // }
+      {
+        rel: 'preload stylesheet',
+        as: 'font',
+        href: 'https://yr.media/statics/yr-media-typography/yr-icons.css'
+      },
 
       {
         href:
