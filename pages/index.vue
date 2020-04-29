@@ -404,12 +404,13 @@ a:hover {
   //     font-weight: bold;
   //   }
   // }
-  // h3 {
-  //   font-size: 0.9rem;
-  //   @include breakpoint(medium) {
-  //     font-size: 1rem;
-  //   }
-  // }
+  h3 {
+    font-family: "Assistant", Arial, Helvetica, sans-serif;
+    // font-size: 0.9rem;
+    // @include breakpoint(medium) {
+    //   font-size: 1rem;
+    // }
+  }
   .absolute-top {
     position: absolute;
     top: 100%;
@@ -442,7 +443,7 @@ a:hover {
     padding: 0;
   }
   h3 {
-    // line-height: 1rem;
+    font-family: "Assistant", Arial, Helvetica, sans-serif;
   }
   h4 {
     letter-spacing: normal;
